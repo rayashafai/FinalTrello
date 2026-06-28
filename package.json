@@ -12,5 +12,12 @@
   "type": "commonjs",
   "devDependencies": {
     "cypress": "^15.17.0"
+  },
+  "dependencies": {
+    "@badeball/cypress-cucumber-preprocessor": "^24.0.1",
+    "@bahmutov/cypress-esbuild-preprocessor": "^2.2.8",
+    "esbuild": "^0.28.1"
   }
+  
 }
+
