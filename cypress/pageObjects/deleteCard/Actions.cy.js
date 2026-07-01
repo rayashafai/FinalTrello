@@ -1,11 +1,6 @@
 class deleteCardActions{
     
-      openBoard(url){
-        cy.wait(5000)
-        cy.visit(url)
-        cy.wait(3000)
-        return this
-    }
+   
     clicksOnCard(){
           cy.findByTestId("list-cards").eq(0).click()
          return this

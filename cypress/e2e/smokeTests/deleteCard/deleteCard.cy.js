@@ -2,10 +2,12 @@ import { Given, When, Then, Before, After } from "@badeball/cypress-cucumber-pre
 import dataUtils from "../../../support/dataUtils.cy";
 import deleteCardActions from "../../../pageObjects/deleteCard/Actions.cy";
 import deleteCardAsserions from "../../../pageObjects/deleteCard/Assertions.cy";
+import sharedActions from "../../../pageObjects/shared/Actions.cy";
 
 const dataUtil = new dataUtils();
 const deleteCard = new deleteCardActions();
 const deleteCardAssertion=new deleteCardAsserions();
+const sharedAction=new sharedActions();
 
 let boardUrl;
 let boardId;
@@ -16,40 +18,20 @@ const cardName = "My Test Card";
 
 Before(() => {
     if (!Cypress.spec.name.includes("deleteCard")) return;
-    dataUtil.createBoard("rayaBoard").then((response) => {
 
-        boardUrl = response.body.url;
-        boardId = response.body.id;
+     sharedAction.loginToTrelloWebsite();
+     sharedAction.createBoard().then((response) => {
+        boardId = response.boardId;
+        boardUrl = response.boardUrl;
+        sharedAction.createCard(boardId,cardName).then((card) => {
+            cardId = card.cardId;
+        })
 
-        cy.log("Board ID = " + boardId);
-        cy.log("Board URL = " + boardUrl);
-
-        // الحصول على الـ List الموجودة داخل الـ Board
-        dataUtil.getLists(boardId).then((listsResponse) => {
-
-            listId = listsResponse.body[0].id;
-
-            cy.log("List ID = " + listId);
-
-            // إنشاء Card داخل الـ List
-            dataUtil.createCard(listId, cardName).then((cardResponse) => {
-
-                cardId = cardResponse.body.id;
-
-                cy.log("Card ID = " + cardId);
-
-            });
-
-        });
-
-    });
-
-    cy.loginToTrello();
-
+    });   
 });
 
 Given("the user open the board that include a card",()=>{
-      deleteCard.openBoard(boardUrl)
+      sharedAction.openBoard(boardUrl)
 })
 
 When("the user clicks on the existing card",()=>{
