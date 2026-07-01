@@ -12,8 +12,9 @@ const cardName="cyCard"
 const createCardAssertion=new createCardAssertions()
 
 
-before(()=>{
-  dataUtil.createBoard("cyBoard").then((response)=>{
+Before(()=>{
+    if (!Cypress.spec.name.includes("createCard")) return;
+    dataUtil.createBoard("cyBoard").then((response)=>{
       boardUrl = response.body.url
       boardId = response.body.id
 
@@ -44,9 +45,9 @@ Then("The card should be created successfully",()=>{
     createCardAssertion.checkCardTitleIsContain(cardName)
 })
 
-after(()=>{
+After(()=>{
    
-  
+  if (!Cypress.spec.name.includes("createCard")) return;
      cy.log("Deleting board: " + boardId)
    console.log("Deleting board:", boardId)
 
