@@ -51,6 +51,7 @@ When("the user clicks on the Delete card button",()=>{
 })
 Then("the card will be deleted successfully from the board",()=>{
      deleteCardAssertion.checkCardDeleted(cardId)
+     cy.screenshot({capture:"fullPage"})
 })
 
 
