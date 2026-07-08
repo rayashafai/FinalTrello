@@ -6,6 +6,7 @@ class createCardActions{
         return this
     }
     clickOnAddACardButton(){
+        cy.wait(3000)
         cy.findByTestId("list-add-card-button",{ timeout: 10000 }).should('be.visible').first().click()
         return this
     }
