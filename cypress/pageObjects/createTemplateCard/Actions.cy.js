@@ -4,7 +4,7 @@
         cy.findByTestId("list-cards").eq(0).click()
         cy.findByTestId("card-back-actions-button").click()
         cy.findByTestId("card-back-make-template-button").click()
-        cy.findByTestId("CloseIcon").click()
+        cy.get("[aria-label='Close dialog']").click()
 
         return this
     }
@@ -22,7 +22,7 @@
          return this
     }
     clicksOnCloseButton(){
-          cy.findByTestId("CloseIcon").click()
+         cy.get("[aria-label='Close dialog']").click()
          return this
     }
 }

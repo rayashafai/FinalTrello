@@ -13,7 +13,7 @@ class hideTemplateActions{
         return this
     }
     clicksOnCloseIcon(){
-          cy.findByTestId("CloseIcon").click()
+          cy.get("[aria-label='Close dialog']").click()
          return this
     }
 
