@@ -1,7 +1,7 @@
 class createBoardActions{
 
 clickOnCreateButtonInNavbar(){
-    cy.wait(2000)
+    cy.wait(3000)
     cy.findByTestId("header-create-menu-button").click()
     return this
 }
